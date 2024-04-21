@@ -43,7 +43,7 @@ class GameSprite(pygame.sprite.Sprite):
     def show(self):
         canvas.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player(GameSprite):
+class Scope(GameSprite):
     def __init__(self, new_image, x, y, width, height, delay) -> None:
         super().__init__(new_image, x, y, width, height)
         self.shoot_time = time.time()
@@ -56,7 +56,7 @@ class Player(GameSprite):
         mouse = pygame.mouse.get_pressed()[0]
         if mouse and (time.time() - self.shoot_time > self.delay):
             self.shoot_time = time.time()
-            bullets.add(Bullet('bullet.png', self.rect.centerx, self.rect.top, 15, 15, 5))
+            bullets.add(Bullet('torpeda.png', self.rect.centerx, self.rect.top, 15, 50, 5))
 
 class Bullet(GameSprite):
     def __init__(self, new_image, x, y, width, height, speed) -> None:
@@ -97,7 +97,7 @@ enemies = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 bonuses = pygame.sprite.Group()
 
-player = Player('com.png', win_width/2, win_height - 200, 150, 80, 0.4)
+player = Scope('scope.png', win_width/2, win_height - 200, 150, 80, 0.4)
 
 previous_time = pygame.time.get_ticks()
 
