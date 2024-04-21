@@ -10,22 +10,28 @@ pygame.mouse.set_visible(0)
 # pygame.mixer.music.load("soundtrack1.mp3")
 # pygame.mixer.music.play(-1)
 # pygame.mixer.music.set_volume(0.2)
+win_width = 1000
+win_height = 600
 font = pygame.font.SysFont(None, 36)
 
-bg = pygame.image.load("backgraund.png")
+bg_sea = pygame.image.load("sea.jpg")
 
-bg = pygame.transform.scale(bg, (500, 720))
+bg_binocle = pygame.image.load("binocle.png")
+
+bg_sea = pygame.transform.scale(bg_sea, (win_width, win_height))
+
+bg_binocle = pygame.transform.scale(bg_binocle, (win_width, win_height))
+
+
 
 clock = pygame.time.Clock()
 
-win_width = 500
-win_height = 720
 
 # CREATING CANVAS
 canvas = pygame.display.set_mode((win_width, win_height))
 
 # TITLE OF CANVAS
-pygame.display.set_caption("Space Shooter")
+pygame.display.set_caption("Sea shooter")
 
 class GameSprite(pygame.sprite.Sprite):
     def __init__(self, new_image, x, y, width, height) -> None:
@@ -91,7 +97,7 @@ enemies = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 bonuses = pygame.sprite.Group()
 
-player = Player('com.png', win_width/2, win_height - 80, 80, 80, 0.4)
+player = Player('com.png', win_width/2, win_height - 200, 150, 80, 0.4)
 
 previous_time = pygame.time.get_ticks()
 
@@ -125,7 +131,7 @@ while not exit:
                 bullets.empty()
                 bonuses.empty()
                 finish = False
-    canvas.blit(bg, (0, 0))
+    canvas.blit(bg_sea, (0, 0))
 
     if not enemies.sprites():
         spawn_enemy()
@@ -164,6 +170,7 @@ while not exit:
         canvas.blit(game_over_text, text_rect)
     
     canvas.blit(bonus_counter_font.render(f"Бонусів: {score}/10", True, (255, 255, 255)), (10, 10))
+    canvas.blit(bg_binocle, (0, 0))
 
     pygame.display.update()
     clock.tick(60)
